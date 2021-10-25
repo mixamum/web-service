@@ -1,7 +1,6 @@
 {
   "name": "project2",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -10,6 +9,17 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
-  }
+    "express": "^4.17.1",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mixamum/web-service.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mixamum/web-service/issues"
+  },
+  "homepage": "https://github.com/mixamum/web-service#readme",
+  "description": ""
 }
