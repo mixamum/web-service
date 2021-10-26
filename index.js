@@ -73,21 +73,23 @@ service.post("/songs/", (req, res) => {
 });
 
 service.get("/songs/:genre/", (req, res) => {
-  const params = [req.params.genre];
-  const query = "SELECT * FROM songs WHERE genre = ? AND is_deleted = 0";
-  connection.query(query, params, (error, rows) => {
-    if (error) {
-      res.status(500);
-      res.json({
-        ok: false,
-        results: error.message,
-      });
-    } else {
-      const memories = rows.map(rowToSongs);
-      res.json({
-        ok: true,
-        results: rows.map(rowToSongs),
-      });
-    }
-  });
+  res.send("Hello from the root application URL");
+
+  // const params = [req.params.genre];
+  // const query = "SELECT * FROM songs WHERE genre = ? AND is_deleted = 0";
+  // connection.query(query, params, (error, rows) => {
+  //   if (error) {
+  //     res.status(500);
+  //     res.json({
+  //       ok: false,
+  //       results: error.message,
+  //     });
+  //   } else {
+  //     const memories = rows.map(rowToSongs);
+  //     res.json({
+  //       ok: true,
+  //       results: rows.map(rowToSongs),
+  //     });
+  //   }
+  // });
 });
