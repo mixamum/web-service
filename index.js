@@ -40,11 +40,11 @@ service.post("/songs", (req, res) => {
     req.body.hasOwnProperty("song_length")
   ) {
     const parameters = [
-      req.body.year,
+      parseInt(req.body.year),
       req.body.song_name,
       req.body.artist_name,
       req.body.genre,
-      req.body.song_length,
+      parseInt(req.body.song_length),
     ];
 
     const query =
