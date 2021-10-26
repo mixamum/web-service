@@ -51,21 +51,21 @@ service.post("/songs", (req, res) => {
       "INSERT INTO memory(year, song_name, artist_name, genre, song_length) VALUES (?, ?, ?, ?, ?)";
     connection.query(query, parameters, (error, result) => {
       if (error) {
-        response.status(500);
-        response.json({
+        res.status(500);
+        res.json({
           ok: false,
           results: error.message,
         });
       } else {
-        response.json({
+        res.json({
           ok: true,
           results: result.insertId,
         });
       }
     });
   } else {
-    response.status(400);
-    response.json({
+    res.status(400);
+    res.json({
       ok: false,
       results: "Incomplete song.",
     });
@@ -73,18 +73,18 @@ service.post("/songs", (req, res) => {
 });
 
 service.get("/songs/:genre", (req, res) => {
-  const params = [requests.params.genre];
+  const params = [req.params.genre];
   const query = "SELECT * FROM songs WHERE genre = ? AND is_deleted = 0";
   connection.query(query, params, (error, rows) => {
     if (error) {
-      response.status(500);
-      response.json({
+      res.status(500);
+      res.json({
         ok: false,
         results: error.message,
       });
     } else {
       const memories = rows.map(rowToSongs);
-      response.json({
+      res.json({
         ok: true,
         results: rows.map(rowToSongs),
       });
