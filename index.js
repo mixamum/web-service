@@ -31,7 +31,7 @@ function rowToSongs(row) {
   };
 }
 
-service.post("/songs", (req, res) => {
+service.post("/songs/", (req, res) => {
   if (
     req.body.hasOwnProperty("year") &&
     req.body.hasOwnProperty("song_name") &&
@@ -72,7 +72,7 @@ service.post("/songs", (req, res) => {
   }
 });
 
-service.get("/songs/:genre", (req, res) => {
+service.get("/songs/:genre/", (req, res) => {
   const params = [req.params.genre];
   const query = "SELECT * FROM songs WHERE genre = ? AND is_deleted = 0";
   connection.query(query, params, (error, rows) => {
