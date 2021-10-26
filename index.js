@@ -1,6 +1,7 @@
 const fs = require("fs");
 const mysql = require("mysql");
 const express = require("express");
+const { response } = require("express");
 
 const credentials = JSON.parse(fs.readFileSync("credentials.json", "utf8"));
 const connection = mysql.createConnection(credentials);
@@ -31,22 +32,25 @@ function rowToSongs(row) {
 }
 
 service.get("/songs/:genre", (req, res) => {
-  const params = [requests.params.genre];
-  const query = "SELECT * FROM songs WHERE genre = ? AND is_deleted = 0";
-  connection.query(query, params, (error, rows) => {
-    if (error) {
-      response.status(500);
-      response.json({
-        ok: false,
-        results: error.message,
-      });
-    } else {
-      const memories = rows.map(rowToSongs);
-      response.json({
-        ok: true,
-        results: rows.map(rowToSongs),
-      });
-    }
+  // const params = [requests.params.genre];
+  // const query = "SELECT * FROM songs WHERE genre = ? AND is_deleted = 0";
+  // connection.query(query, params, (error, rows) => {
+  //   if (error) {
+  //     response.status(500);
+  //     response.json({
+  //       ok: false,
+  //       results: error.message,
+  //     });
+  //   } else {
+  //     const memories = rows.map(rowToSongs);
+  //     response.json({
+  //       ok: true,
+  //       results: rows.map(rowToSongs),
+  //     });
+  //   }
+  // });
+  response.json({
+    ok: true,
+    results: "lol",
   });
 });
-
