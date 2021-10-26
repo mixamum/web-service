@@ -7,5 +7,5 @@ CREATE TABLE songs (
   artist_name VARCHAR(255),
   genre VARCHAR(255),
   song_length INT,
-  is_deleted INT DEFAULT 0,
+  is_deleted INT DEFAULT 0
 );
