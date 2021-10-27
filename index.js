@@ -31,10 +31,7 @@ function rowToSongs(row) {
   };
 }
 
-service.get("/", function (req, res) {
-  res.send("Hello World!");
-});
-
+// Posts a song into
 service.post("/songs/", (req, res) => {
   const parameters = [
     req.body.year,
@@ -61,24 +58,24 @@ service.post("/songs/", (req, res) => {
   });
 });
 
-// service.get("/:genre/", (req, res) => {
-//   const params = [req.params.genre];
-//   const query = "SELECT * FROM songs WHERE genre = ? AND is_deleted = 0";
-//   connection.query(query, params, (error, rows) => {
-//     if (error) {
-//       res.status(500);
-//       res.json({
-//         ok: false,
-//         results: error.message,
-//       });
-//     } else {
-//       res.json({
-//         ok: true,
-//         results: rows.map(rowToSongs),
-//       });
-//     }
-//   });
-// });
+service.get("/songs/:genre/", (req, res) => {
+  const params = [req.params.genre];
+  const query = "SELECT * FROM songs WHERE genre = ? AND is_deleted = 0";
+  connection.query(query, params, (error, rows) => {
+    if (error) {
+      res.status(500);
+      res.json({
+        ok: false,
+        results: error.message,
+      });
+    } else {
+      res.json({
+        ok: true,
+        results: rows.map(rowToSongs),
+      });
+    }
+  });
+});
 
 service.get("/songs/", (req, res) => {
   const query = "SELECT * FROM songs WHERE is_deleted = 0";
@@ -118,7 +115,7 @@ service.get("/songs/:genre/:artist_name/", (req, res) => {
   });
 });
 
-service.get("/songs/:year/:genre/", (req, res) => {
+service.get("/songs/:genre/:artist_name/:song_name", (req, res) => {
   const params = [req.params.year];
   const query = "SELECT * FROM songs WHERE year = ? AND is_deleted = 0";
   connection.query(query, params, (error, rows) => {
@@ -137,24 +134,24 @@ service.get("/songs/:year/:genre/", (req, res) => {
   });
 });
 
-service.get("/songs/:song_name/", (req, res) => {
-  const params = [req.params.song_name];
-  const query = "SELECT * FROM songs WHERE song_name = ? AND is_deleted = 0";
-  connection.query(query, params, (error, rows) => {
-    if (error) {
-      res.status(500);
-      res.json({
-        ok: false,
-        results: error.message,
-      });
-    } else {
-      res.json({
-        ok: true,
-        results: rows.map(rowToSongs),
-      });
-    }
-  });
-});
+// service.get("/songs/:song_name/", (req, res) => {
+//   const params = [req.params.song_name];
+//   const query = "SELECT * FROM songs WHERE song_name = ? AND is_deleted = 0";
+//   connection.query(query, params, (error, rows) => {
+//     if (error) {
+//       res.status(500);
+//       res.json({
+//         ok: false,
+//         results: error.message,
+//       });
+//     } else {
+//       res.json({
+//         ok: true,
+//         results: rows.map(rowToSongs),
+//       });
+//     }
+//   });
+// });
 
 service.patch("/songs/:id", (req, res) => {
   const params = [
@@ -179,7 +176,6 @@ service.patch("/songs/:id", (req, res) => {
     } else {
       res.json({
         ok: true,
-        //results: rows.map(rowToSongs),
       });
     }
   });
@@ -204,8 +200,8 @@ service.delete("/songs/:id", (req, res) => {
   });
 });
 
-service.options("/options/", (request, response) => {
-  response.set("Access-Control-Allow-Headers", "Content-Type");
-  response.set("Access-Control-Allow-Methods", "GET,POST,PATCH,DELETE");
-  response.sendStatus(200);
+service.options("*", (req, res) => {
+  res.set("Access-Control-Allow-Headers", "Content-Type");
+  res.set("Access-Control-Allow-Methods", "GET,POST,PATCH,DELETE");
+  res.sendStatus(200);
 });
