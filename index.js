@@ -54,7 +54,7 @@ service.post("/songs/", (req, res) => {
     parseInt(req.body.song_length),
   ];
   const query =
-    "INSERT INTO memory(year, song_name, artist_name, genre, song_length) VALUES (?, ?, ?, ?, ?)";
+    "INSERT INTO songs(year, song_name, artist_name, genre, song_length) VALUES (?, ?, ?, ?, ?)";
   connection.query(query, parameters, (error, result) => {
     if (error) {
       res.status(500);
