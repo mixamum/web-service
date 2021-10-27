@@ -163,6 +163,7 @@ service.patch("/songs/:id", (req, res) => {
     req.body.artist_name,
     req.body.genre,
     req.body.song_length,
+    parseInt(request.params.id),
   ];
 
   const query =
