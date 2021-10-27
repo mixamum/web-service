@@ -184,3 +184,22 @@ service.patch("/songs/:id", (req, res) => {
     }
   });
 });
+
+service.delete("/songs/:id", (req, res) => {
+  const parameters = [parseInt(req.params.id)];
+
+  const query = "UPDATE songs SET is_deleted = 1 WHERE id = ?";
+  connection.query(query, parameters, (error, result) => {
+    if (error) {
+      response.status(404);
+      response.json({
+        ok: false,
+        results: error.message,
+      });
+    } else {
+      response.json({
+        ok: true,
+      });
+    }
+  });
+});
