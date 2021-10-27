@@ -58,10 +58,9 @@ service.post("/songs/", (req, res) => {
   });
 });
 
-service.get("/songs/:genre/", (req, res) => {
-  const params = [req.params.genre];
-  const query = "SELECT * FROM songs WHERE genre = ? AND is_deleted = 0";
-  connection.query(query, params, (error, rows) => {
+service.get("/songs/", (req, res) => {
+  const query = "SELECT * FROM songs WHERE is_deleted = 0";
+  connection.query(query, (error, rows) => {
     if (error) {
       res.status(500);
       res.json({
@@ -77,9 +76,10 @@ service.get("/songs/:genre/", (req, res) => {
   });
 });
 
-service.get("/songs/", (req, res) => {
-  const query = "SELECT * FROM songs WHERE is_deleted = 0";
-  connection.query(query, (error, rows) => {
+service.get("/:genre/", (req, res) => {
+  const params = [req.params.genre];
+  const query = "SELECT * FROM songs WHERE genre = ? AND is_deleted = 0";
+  connection.query(query, params, (error, rows) => {
     if (error) {
       res.status(500);
       res.json({
