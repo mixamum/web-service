@@ -134,24 +134,25 @@ service.get("/:genre/:song_name/", (req, res) => {
   });
 });
 
-// service.get("/songs/:song_name/", (req, res) => {
-//   const params = [req.params.song_name];
-//   const query = "SELECT * FROM songs WHERE song_name = ? AND is_deleted = 0";
-//   connection.query(query, params, (error, rows) => {
-//     if (error) {
-//       res.status(500);
-//       res.json({
-//         ok: false,
-//         results: error.message,
-//       });
-//     } else {
-//       res.json({
-//         ok: true,
-//         results: rows.map(rowToSongs),
-//       });
-//     }
-//   });
-// });
+service.get("/songs/:genre/:artist_name/", (req, res) => {
+  const params = [req.params.genre, req.params.artist_name];
+  const query =
+    "SELECT * FROM songs WHERE genre = ? AND artist_name = ?  AND is_deleted = 0";
+  connection.query(query, params, (error, rows) => {
+    if (error) {
+      res.status(500);
+      res.json({
+        ok: false,
+        results: error.message,
+      });
+    } else {
+      res.json({
+        ok: true,
+        results: rows.map(rowToSongs),
+      });
+    }
+  });
+});
 
 service.patch("/songs/:id", (req, res) => {
   const params = [
