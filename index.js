@@ -155,3 +155,31 @@ service.get("/songs/:song_name/", (req, res) => {
     }
   });
 });
+
+service.patch("/songs/:id", (req, res) => {
+  const params = [
+    req.body.year,
+    req.body.song_name,
+    req.body.artist_name,
+    req.body.genre,
+    req.body.song_length,
+  ];
+
+  const query =
+    "UPDATE songs SET year = ?, song_name = ?, artist_name = ?, genre = ?, song_length = ? WHERE id = ?";
+
+  connection.query(query, params, (error, result) => {
+    if (error) {
+      res.status(500);
+      res.json({
+        ok: false,
+        results: error.message,
+      });
+    } else {
+      res.json({
+        ok: true,
+        //results: rows.map(rowToSongs),
+      });
+    }
+  });
+});
