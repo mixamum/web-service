@@ -31,7 +31,7 @@ function rowToSongs(row) {
   };
 }
 
-app.get("/", function (req, res) {
+service.get("/", function (req, res) {
   res.send("Hello World!");
 });
 
