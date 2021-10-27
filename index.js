@@ -38,7 +38,7 @@ service.get("/", function (req, res) {
 service.post("/songs/", (req, res) => {
   // res.json({
   //   requestBody: req.body,
-  // });
+  //});
   // if (
   //   req.body.hasOwnProperty("year") &&
   //   req.body.hasOwnProperty("song_name") &&
@@ -75,7 +75,7 @@ service.post("/songs/", (req, res) => {
   //     ok: false,
   //     results: "Incomplete song.",
   //   });
-  // }
+  //}
 });
 
 service.get("/songs/:genre/", (req, res) => {
@@ -203,7 +203,7 @@ service.delete("/songs/:id", (req, res) => {
   });
 });
 
-service.options("*", (request, response) => {
+service.options("options", (request, response) => {
   response.set("Access-Control-Allow-Headers", "Content-Type");
   response.set("Access-Control-Allow-Methods", "GET,POST,PATCH,DELETE");
   response.sendStatus(200);
