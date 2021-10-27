@@ -98,9 +98,10 @@ service.get("/songs/:genre/", (req, res) => {
   });
 });
 
-service.get("/songs/:artist_name/", (req, res) => {
-  const params = [req.params.artist_name];
-  const query = "SELECT * FROM songs WHERE artist_name = ? AND is_deleted = 0";
+service.get("/songs/:genre/:artist_name/", (req, res) => {
+  const params = [req.params.genre, req.params.artist_name];
+  const query =
+    "SELECT * FROM songs WHERE genre = ? AND artist_name = ? AND is_deleted = 0";
   connection.query(query, params, (error, rows) => {
     if (error) {
       res.status(500);
