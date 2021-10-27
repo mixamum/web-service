@@ -36,16 +36,6 @@ service.get("/", function (req, res) {
 });
 
 service.post("/songs/", (req, res) => {
-  // res.json({
-  //   requestBody: req.body,
-  //});
-  // if (
-  //   req.body.hasOwnProperty("year") &&
-  //   req.body.hasOwnProperty("song_name") &&
-  //   req.body.hasOwnProperty("artist_name") &&
-  //   req.body.hasOwnProperty("genre") &&
-  //   req.body.hasOwnProperty("song_length")
-  // ) {
   const parameters = [
     req.body.year,
     req.body.song_name,
@@ -69,13 +59,6 @@ service.post("/songs/", (req, res) => {
       });
     }
   });
-  // } else {
-  //   res.status(400);
-  //   res.json({
-  //     ok: false,
-  //     results: "Incomplete song.",
-  //   });
-  //}
 });
 
 service.get("/:genre/", (req, res) => {
@@ -98,7 +81,7 @@ service.get("/:genre/", (req, res) => {
 });
 
 service.get("/songs/", (req, res) => {
-  const query = "SELECT * FROM songs WHERE genre = ? AND is_deleted = 0";
+  const query = "SELECT * FROM songs WHERE is_deleted = 0";
   connection.query(query, (error, rows) => {
     if (error) {
       res.status(500);
