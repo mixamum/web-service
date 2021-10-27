@@ -31,6 +31,10 @@ function rowToSongs(row) {
   };
 }
 
+app.get("/", function (req, res) {
+  res.send("Hello World!");
+});
+
 service.post("/songs/", (req, res) => {
   if (
     req.body.hasOwnProperty("year") &&
