@@ -191,13 +191,13 @@ service.delete("/songs/:id", (req, res) => {
   const query = "UPDATE songs SET is_deleted = 1 WHERE id = ?";
   connection.query(query, parameters, (error, result) => {
     if (error) {
-      response.status(404);
-      response.json({
+      res.status(404);
+      res.json({
         ok: false,
         results: error.message,
       });
     } else {
-      response.json({
+      res.json({
         ok: true,
       });
     }
