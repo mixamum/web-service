@@ -15,7 +15,7 @@ connection.connect((error) => {
   }
 });
 
-const port = 5001;
+const port = 3001;
 service.listen(port, () => {
   console.log(`We're live on port: ${port}!`);
 });
