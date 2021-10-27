@@ -186,7 +186,7 @@ service.patch("/songs/:id", (req, res) => {
 });
 
 service.delete("/songs/:id", (req, res) => {
-  const parameters = [parseInt(req.params.id)];
+  const parameters = [req.params.id];
 
   const query = "UPDATE songs SET is_deleted = 1 WHERE id = ?";
   connection.query(query, parameters, (error, result) => {
