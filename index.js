@@ -97,5 +97,3 @@ service.get("/songs/:genre/", (req, res) => {
     }
   });
 });
-
-connection.end();
