@@ -79,7 +79,6 @@ service.post("/songs/", (req, res) => {
 });
 
 service.get("/songs/:genre/", (req, res) => {
-  // res.send("Hello from the root application URL");
   const params = [req.params.genre];
   const query = "SELECT * FROM songs WHERE genre = ? AND is_deleted = 0";
   connection.query(query, params, (error, rows) => {
@@ -118,7 +117,7 @@ service.get("/songs/:genre/:artist_name/", (req, res) => {
   });
 });
 
-service.get("/songs/:year/", (req, res) => {
+service.get("/songs/:year/:genre/", (req, res) => {
   const params = [req.params.year];
   const query = "SELECT * FROM songs WHERE year = ? AND is_deleted = 0";
   connection.query(query, params, (error, rows) => {
@@ -202,4 +201,10 @@ service.delete("/songs/:id", (req, res) => {
       });
     }
   });
+});
+
+service.options("*", (request, response) => {
+  response.set("Access-Control-Allow-Headers", "Content-Type");
+  response.set("Access-Control-Allow-Methods", "GET,POST,PATCH,DELETE");
+  response.sendStatus(200);
 });
