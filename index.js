@@ -36,9 +36,9 @@ service.get("/", function (req, res) {
 });
 
 service.post("/songs/", (req, res) => {
-  res.json({
-    requestBody: req.body,
-  });
+  // res.json({
+  //   requestBody: req.body,
+  // });
   if (
     req.body.hasOwnProperty("year") &&
     req.body.hasOwnProperty("song_name") &&
