@@ -36,46 +36,46 @@ service.get("/", function (req, res) {
 });
 
 service.post("/songs/", (req, res) => {
-  // res.json({
-  //   requestBody: req.body,
-  // });
-  // if (
-  //   req.body.hasOwnProperty("year") &&
-  //   req.body.hasOwnProperty("song_name") &&
-  //   req.body.hasOwnProperty("artist_name") &&
-  //   req.body.hasOwnProperty("genre") &&
-  //   req.body.hasOwnProperty("song_length")
-  // ) {
-  const parameters = [
-    parseInt(req.body.year),
-    req.body.song_name,
-    req.body.artist_name,
-    req.body.genre,
-    parseInt(req.body.song_length),
-  ];
-  const query =
-    "INSERT INTO songs(year, song_name, artist_name, genre, song_length) VALUES (?, ?, ?, ?, ?)";
-  connection.query(query, parameters, (error, result) => {
-    if (error) {
-      res.status(500);
-      res.json({
-        ok: false,
-        results: error.message,
-      });
-    } else {
-      res.json({
-        ok: true,
-        results: result.insertId,
-      });
-    }
+  res.json({
+    requestBody: req.body,
   });
-  // } else {
-  //   res.status(400);
-  //   res.json({
-  //     ok: false,
-  //     results: "Incomplete song.",
-  //   });
-  // }
+  if (
+    req.body.hasOwnProperty("year") &&
+    req.body.hasOwnProperty("song_name") &&
+    req.body.hasOwnProperty("artist_name") &&
+    req.body.hasOwnProperty("genre") &&
+    req.body.hasOwnProperty("song_length")
+  ) {
+    const parameters = [
+      parseInt(req.body.year),
+      req.body.song_name,
+      req.body.artist_name,
+      req.body.genre,
+      parseInt(req.body.song_length),
+    ];
+    const query =
+      "INSERT INTO songs(year, song_name, artist_name, genre, song_length) VALUES (?, ?, ?, ?, ?)";
+    connection.query(query, parameters, (error, result) => {
+      if (error) {
+        res.status(500);
+        res.json({
+          ok: false,
+          results: error.message,
+        });
+      } else {
+        res.json({
+          ok: true,
+          results: result.insertId,
+        });
+      }
+    });
+  } else {
+    res.status(400);
+    res.json({
+      ok: false,
+      results: "Incomplete song.",
+    });
+  }
 });
 
 service.get("/songs/:genre/", (req, res) => {
