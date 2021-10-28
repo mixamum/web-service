@@ -30,7 +30,7 @@ function rowToSongs(row) {
     song_length: row.song_length,
   };
 }
-service.get("/", function (req, res) {
+service.get("/report.html", function (req, res) {
   res.sendFile(path.join(__dirname, "report.html"));
 });
 
