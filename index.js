@@ -31,8 +31,7 @@ function rowToSongs(row) {
   };
 }
 service.get("/", function (req, res) {
-  let p = path.join(__dirname, "report.html");
-  res.sendFile(p);
+  res.sendFile(path.join(__dirname, "/report.html"));
 });
 
 // Posts a song into

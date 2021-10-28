@@ -20,6 +20,35 @@
     </p>
 
     <p>My Endpoints</p>
-    <!-- <ul></ul> -->
+    <ul>
+      <li>POST /songs</li>
+      <p>
+        Takes a JSON body as 
+        <ul>
+            <li>"year": "2017",</li>
+            <li>"song_name": "Believer",</li>
+            <li>"artist_name": "Imagine Dragons"</li>
+            <li>"genre": "Rock",</li>
+            <li>"song_length": "3"</li>
+        </ul>
+      </p>
+      <li>GET /songs</li>
+      <li>GET /:genre</li>
+      <li>GET /songs/:artist_name</li>
+      <li>GET /:genre/:song_name</li>
+      <li>GET /songs/:genre/:artist_name/</li>
+      <li>PATCH /songs/:id</li>
+      <p>
+        Takes a JSON body as 
+        <ul>
+            <li>"year": "2017",</li>
+            <li>"song_name": "Believer",</li>
+            <li>"artist_name": "Imagine Dragons"</li>
+            <li>"genre": "Rock",</li>
+            <li>"song_length": "3"</li>
+        </ul>
+      </p>
+      <li>DELETE /songs/:id</li>
+    </ul>
   </body>
 </html>
