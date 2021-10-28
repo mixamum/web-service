@@ -5,6 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Project 2 Report</title>
+    <style> 
+        .main > li {
+            font-size: 20px;
+            font-weight: bold;
+            color: purple;
+        }
+
+        .main > p {
+            
+        }
+
+        .sub {
+            list-style: none;
+        }
+
+        .t {
+            font-size:30px;
+        }
+    </style>
   </head>
   <body>
     <p>
@@ -19,36 +38,48 @@
       successfully shared my github repository with twodee!
     </p>
 
-    <p>My Endpoints</p>
-    <ul>
+    <p class = "t">My Endpoints</p>
+    <ul class = "main">
       <li>POST /songs</li>
       <p>
         Takes a JSON body as 
-        <ul>
+        <ul class = "sub">
+            <li>{</li>
             <li>"year": "2017",</li>
             <li>"song_name": "Believer",</li>
             <li>"artist_name": "Imagine Dragons"</li>
             <li>"genre": "Rock",</li>
             <li>"song_length": "3"</li>
+            <li>}</li>
         </ul>
       </p>
       <li>GET /songs</li>
+      <p>Gets all the songs on the playlist</p>
       <li>GET /:genre</li>
+      <p>Get a song specifically by the songs genre</p>
       <li>GET /songs/:artist_name</li>
+      <p>Gets a songs by the artist name</p>
       <li>GET /:genre/:song_name</li>
+      <p>Gets a song by the genre and the name of a song</p>
       <li>GET /songs/:genre/:artist_name/</li>
+      <p>Gets a song by genre and the artist name</p>
       <li>PATCH /songs/:id</li>
       <p>
         Takes a JSON body as 
-        <ul>
+        <ul class = "sub">
+            <li>{</li>
             <li>"year": "2017",</li>
             <li>"song_name": "Believer",</li>
             <li>"artist_name": "Imagine Dragons"</li>
             <li>"genre": "Rock",</li>
             <li>"song_length": "3"</li>
+            <li>}</li>
         </ul>
+        <br>
+        edits the field accordingly
       </p>
       <li>DELETE /songs/:id</li>
+      <p>Deletes the given song by an id</p>
     </ul>
   </body>
 </html>

@@ -31,11 +31,6 @@ function rowToSongs(row) {
     song_length: row.song_length,
   };
 }
-// service.get("/report.html", function (req, res) {
-//   res.sendFile(path.join(__dirname, "report.html"));
-// });
-
-//res.sendFile("/report.html");
 
 // Posts a song into
 service.post("/songs/", (req, res) => {
