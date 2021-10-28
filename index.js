@@ -31,6 +31,7 @@ function rowToSongs(row) {
   };
 }
 service.get("/", function (req, res) {
+  res.send("Hello World!");
   res.sendFile(path.join(__dirname, "/report.html"));
 });
 
