@@ -7,7 +7,7 @@ const connection = mysql.createConnection(credentials);
 
 const service = express();
 service.use(express.json());
-service.use(express.static("public"));
+service.use("/report.html", express.static("public"));
 
 connection.connect((error) => {
   if (error) {
@@ -31,9 +31,9 @@ function rowToSongs(row) {
     song_length: row.song_length,
   };
 }
-service.get("/report.html", function (req, res) {
-  res.sendFile(path.join(__dirname, "report.html"));
-});
+// service.get("/report.html", function (req, res) {
+//   res.sendFile(path.join(__dirname, "report.html"));
+// });
 
 //res.sendFile("/report.html");
 
