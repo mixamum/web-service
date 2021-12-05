@@ -32,6 +32,11 @@ function rowToSongs(row) {
   };
 }
 
+service.use((request, response, next) => {
+  response.set("Access-Control-Allow-Origin", "*");
+  next();
+});
+
 service.options("*", (req, res) => {
   res.set("Access-Control-Allow-Headers", "Content-Type");
   res.set("Access-Control-Allow-Methods", "GET,POST,PATCH,DELETE");
