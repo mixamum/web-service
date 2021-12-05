@@ -35,11 +35,11 @@ function rowToSongs(row) {
 // Posts a song into
 service.post("/songs/", (req, res) => {
   const parameters = [
-    req.body.year,
+    // req.body.year,
     req.body.song_name,
     req.body.artist_name,
-    req.body.genre,
-    req.body.song_length,
+    // req.body.genre,
+    // req.body.song_length,
   ];
   const query =
     "INSERT INTO songs(year, song_name, artist_name, genre, song_length) VALUES (?, ?, ?, ?, ?)";
