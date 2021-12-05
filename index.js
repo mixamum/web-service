@@ -77,6 +77,26 @@ service.get("/songs/", (req, res) => {
   });
 });
 
+service.get("/:artist_name/:song_name/", (req, res) => {
+  const params = [req.params.artist_name, req.params.song_name];
+  const query =
+    "SELECT * FROM songs WHERE artist_name = ? AND song_name = ? AND is_deleted = 0";
+  connection.query(query, params, (error, rows) => {
+    if (error) {
+      res.status(500);
+      res.json({
+        ok: false,
+        results: error.message,
+      });
+    } else {
+      res.json({
+        ok: true,
+        results: rows.map(rowToSongs),
+      });
+    }
+  });
+});
+
 service.get("/:genre/", (req, res) => {
   const params = [req.params.genre];
   const query = "SELECT * FROM songs WHERE genre = ? AND is_deleted = 0";
@@ -99,26 +119,6 @@ service.get("/:genre/", (req, res) => {
 service.get("/songs/:artist_name/", (req, res) => {
   const params = [req.params.artist_name];
   const query = "SELECT * FROM songs WHERE artist_name = ? AND is_deleted = 0";
-  connection.query(query, params, (error, rows) => {
-    if (error) {
-      res.status(500);
-      res.json({
-        ok: false,
-        results: error.message,
-      });
-    } else {
-      res.json({
-        ok: true,
-        results: rows.map(rowToSongs),
-      });
-    }
-  });
-});
-
-service.get("/:artist_name/:song_name/", (req, res) => {
-  const params = [req.params.artist_name, req.params.song_name];
-  const query =
-    "SELECT * FROM songs WHERE artist_name = ? AND song_name = ? AND is_deleted = 0";
   connection.query(query, params, (error, rows) => {
     if (error) {
       res.status(500);
