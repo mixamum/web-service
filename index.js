@@ -32,6 +32,12 @@ function rowToSongs(row) {
   };
 }
 
+service.options("*", (req, res) => {
+  res.set("Access-Control-Allow-Headers", "Content-Type");
+  res.set("Access-Control-Allow-Methods", "GET,POST,PATCH,DELETE");
+  res.sendStatus(200);
+});
+
 // Posts a song into
 service.post("/songs/", (req, res) => {
   const parameters = [
@@ -200,10 +206,4 @@ service.delete("/songs/:id", (req, res) => {
       });
     }
   });
-});
-
-service.options("*", (req, res) => {
-  res.set("Access-Control-Allow-Headers", "Content-Type");
-  res.set("Access-Control-Allow-Methods", "GET,POST,PATCH,DELETE");
-  res.sendStatus(200);
 });
