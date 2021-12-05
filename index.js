@@ -35,11 +35,11 @@ function rowToSongs(row) {
 // Posts a song into
 service.post("/songs/", (req, res) => {
   const parameters = [
-    // req.body.year,
+    req.body.year,
     req.body.song_name,
     req.body.artist_name,
-    // req.body.genre,
-    // req.body.song_length,
+    req.body.genre,
+    req.body.song_length,
   ];
   const query =
     "INSERT INTO songs(year, song_name, artist_name, genre, song_length) VALUES (?, ?, ?, ?, ?)";
@@ -77,10 +77,9 @@ service.get("/songs/", (req, res) => {
   });
 });
 
-service.get("/:artist_name/:song_name/", (req, res) => {
-  const params = [req.params.artist_name, req.params.song_name];
-  const query =
-    "SELECT * FROM songs WHERE artist_name = ? AND song_name = ? AND is_deleted = 0";
+service.get("/:genre/", (req, res) => {
+  const params = [req.params.genre];
+  const query = "SELECT * FROM songs WHERE genre = ? AND is_deleted = 0";
   connection.query(query, params, (error, rows) => {
     if (error) {
       res.status(500);
@@ -97,63 +96,64 @@ service.get("/:artist_name/:song_name/", (req, res) => {
   });
 });
 
-// service.get("/:genre/", (req, res) => {
-//   const params = [req.params.genre];
-//   const query = "SELECT * FROM songs WHERE genre = ? AND is_deleted = 0";
-//   connection.query(query, params, (error, rows) => {
-//     if (error) {
-//       res.status(500);
-//       res.json({
-//         ok: false,
-//         results: error.message,
-//       });
-//     } else {
-//       res.json({
-//         ok: true,
-//         results: rows.map(rowToSongs),
-//       });
-//     }
-//   });
-// });
+service.get("/songs/:artist_name/", (req, res) => {
+  const params = [req.params.artist_name];
+  const query = "SELECT * FROM songs WHERE artist_name = ? AND is_deleted = 0";
+  connection.query(query, params, (error, rows) => {
+    if (error) {
+      res.status(500);
+      res.json({
+        ok: false,
+        results: error.message,
+      });
+    } else {
+      res.json({
+        ok: true,
+        results: rows.map(rowToSongs),
+      });
+    }
+  });
+});
 
-// service.get("/songs/:artist_name/", (req, res) => {
-//   const params = [req.params.artist_name];
-//   const query = "SELECT * FROM songs WHERE artist_name = ? AND is_deleted = 0";
-//   connection.query(query, params, (error, rows) => {
-//     if (error) {
-//       res.status(500);
-//       res.json({
-//         ok: false,
-//         results: error.message,
-//       });
-//     } else {
-//       res.json({
-//         ok: true,
-//         results: rows.map(rowToSongs),
-//       });
-//     }
-//   });
-// });
+service.get("/:genre/:song_name/", (req, res) => {
+  const params = [req.params.genre, req.params.song_name];
+  const query =
+    "SELECT * FROM songs WHERE genre = ? AND song_name = ? AND is_deleted = 0";
+  connection.query(query, params, (error, rows) => {
+    if (error) {
+      res.status(500);
+      res.json({
+        ok: false,
+        results: error.message,
+      });
+    } else {
+      res.json({
+        ok: true,
+        results: rows.map(rowToSongs),
+      });
+    }
+  });
+});
 
-// service.get("/songs/:genre/:artist_name/", (req, res) => {
-//   const params = [req.params.genre, req.params.artist_name];
-//   const query =
-//     "SELECT * FROM songs WHERE genre = ? AND artist_name = ?  AND is_deleted = 0";
-//   connection.query(query, params, (error, rows) => {
-//     if (error) {
-//       res.status(500);
-//       res.json({
-//         ok: false,
-//         results: error.message,
-//       });
-//     } else {
-//       res.json({
-//         ok: true,
-//         results: rows.map(rowToSongs),
-//       });
-//     }
-//   });
-// });
+service.get("/songs/:genre/:artist_name/", (req, res) => {
+  const params = [req.params.genre, req.params.artist_name];
+  const query =
+    "SELECT * FROM songs WHERE genre = ? AND artist_name = ?  AND is_deleted = 0";
+  connection.query(query, params, (error, rows) => {
+    if (error) {
+      res.status(500);
+      res.json({
+        ok: false,
+        results: error.message,
+      });
+    } else {
+      res.json({
+        ok: true,
+        results: rows.map(rowToSongs),
+      });
+    }
+  });
+});
 
 service.patch("/songs/:id", (req, res) => {
   const params = [
